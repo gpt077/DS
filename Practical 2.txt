@@ -1,0 +1,53 @@
+#Read CSV, Json
+import pandas as pd
+df=pd.read_csv("D:\DS\cardata.csv")
+print(df)
+
+col=["model"]
+df.drop(columns=col, axis=1)
+
+cols=["hwy","class"]
+df.drop(columns=cols, axis=1)
+
+new_column_names = {'model': 'car_model', 'trans': 'ts'}
+df = df.rename(columns=new_column_names)
+print(df)
+
+empty_rows = df.isnull().all(axis=1)
+print(empty_rows)
+
+num_empty_rows = empty_rows.sum()
+print("Number of empty rows:", num_empty_rows)
+
+missing_values_in_row = df.isnull().any(axis=1)
+
+print(df[missing_values_in_row])
+
+num_missing_values_in_row = missing_values_in_row.sum()
+print("Number of rows with missing values:", num_missing_values_in_row)
+
+df_cleaned = df.dropna()
+
+print(df_cleaned)
+
+df2=pd.read_csv("d:\\ds\\biostats.csv")
+print(df2)
+
+sorted_df = df2.sort_values(by='Name')
+print(sorted_df)
+
+sorted_df = df2.sort_values(by='Name',ascending=False)
+print(sorted_df)
+
+sorted_df = df2.sort_values(by=['Sex', 'Age'])
+print(sorted_df)
+
+filtered_df = df2[df2['Height'] > 30]
+print(filtered_df)
+
+filtered_df = df2[(df2['Age'] > 10) & (df2['Height'] < 70)]
+print(filtered_df)
+
+grouped_data = df2.groupby('Sex')
+print(grouped_data)
+grouped_data.count()

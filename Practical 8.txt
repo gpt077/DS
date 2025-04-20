@@ -1,0 +1,38 @@
+#k means clustering similar DP
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
+df = pd.read_csv("age.csv")
+
+X = df[['Age', 'Time_Spent']]
+
+k = 3
+
+kmeans = KMeans(n_clusters=k)
+
+kmeans.fit(X)
+
+centers = kmeans.cluster_centers_
+labels = kmeans.labels_
+
+plt.scatter(df['Age'], df['Time_Spent'], c=labels, cmap='viridis', alpha=0.5)
+plt.scatter(centers[:, 0], centers[:, 1], c='red', marker='X',
+            label='Cluster Centers')
+plt.xlabel('Age')
+plt.ylabel('Time Spent on Gadgets')
+plt.title('K-means Clustering')
+plt.legend()
+plt.show()
+
+
+
+#Elbow Method, Visualize
+age_unknown = [[55, 0]]
+
+cluster_1 = kmeans.predict(age_unknown)
+
+cluster_center_1 = centers[cluster_1]
+
+print("Predicted cluster for the given age", cluster_1)
+print("Estimated time spent on gadgets for the given age", cluster_center_1[:,1][0])

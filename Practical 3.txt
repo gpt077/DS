@@ -1,0 +1,40 @@
+#feature Scaling n Normalzation
+import numpy as np
+import pandas as pd
+from sklearn import preprocessing
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+data=pd.read_csv("D:\\DS\\biostats.csv")
+data.head(15)
+
+data=data.dropna()
+data
+
+data.select_dtypes(include=['number']).mean()
+
+data.median()
+
+df=data.iloc[:,1:3].values
+df
+
+min_max_scaler=preprocessing.MinMaxScaler(feature_range=(0,1))
+df_after_minmax=min_max_scaler.fit_transform(df)
+df_after_minmax
+
+ss=preprocessing.StandardScaler()
+df_after_ss=ss.fit_transform(df)
+df_after_ss
+
+df_after_minmax=pd.mean()
+
+
+
+#dummification
+df= pd.read_csv("D:\\DS\\biostatsD.csv")
+df
+
+df_dummies = pd.get_dummies(df, columns=['Gender'])
+
+# Print the resulting DataFrame with dummified columns
+print(df_dummies)

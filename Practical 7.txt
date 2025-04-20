@@ -1,0 +1,79 @@
+#Logistic Regression
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
+
+df=pd.read_csv("/content/LData.csv")
+
+X=df[['x']]
+Y=df['y']
+
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=42)
+
+model=LogisticRegression()
+
+model.fit(X_train,Y_train)
+y_pred= model.predict(X_test)
+accuracy=accuracy_score(Y_test,y_pred)
+print("Accuracy:accuracy")
+
+x_new= pd.DataFrame({'x':[1.5,2.8, 4.2]})
+y_pred_new=model.predict(x_new)
+print("Predicted class for x_new:",y_pred_new)
+y_pred=model.predict(X_test)
+accuracy=accuracy_score(Y_test,y_pred)
+precision=precision_score(Y_test,y_pred)
+recall=recall_score(Y_test,y_pred)
+f1=f1_score(Y_test,y_pred)
+
+print(f"models performance metrics:")
+print(f"Accuracy:{accuracy:.2f}")
+print(f"Precision:{precision:.2f}")
+print(f"Recall:{recall:.2f}")
+print(f"F1-score:{f1:.2f}")
+
+print("\nclassification report:")
+print(classification_report(Y_test,y_pred,target_names=['No disease','Disease']))
+
+
+
+#Classification
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
+
+y_pred=model.predict(X_test)
+
+accuracy=accuracy_score(Y_test,y_pred)
+precision=precision_score(Y_test,y_pred)
+recall=recall_score(Y_test,y_pred)
+f1=f1_score(Y_test,y_pred)
+
+print(f"models performance metrics:")
+print(f"Accuracy:{accuracy:.2f}")
+print(f"Precision:{precision:.2f}")
+print(f"Recall:{recall:.2f}")
+print(f"F1-score:{f1:.2f}")
+
+print("n\nclassification report:")
+print(classification_report(Y_test,y_pred,target_names=['No disease','Disease']))
+
+
+#decision tree n decision rules
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+import matplotlib.pyplot as plt
+
+heart_data = pd.read_csv("heart.csv")
+
+X = heart_data.drop(columns='target')
+y = heart_data['target']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = DecisionTreeClassifier(max_depth=3)
+model.fit(X_train, y_train)
+
+plt.figure(figsize=(12, 8))
+plot_tree(model, feature_names=X.columns, class_names=['No Disease', 'Disease'], filled=True)
+plt.show()

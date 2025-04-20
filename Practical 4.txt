@@ -1,0 +1,64 @@
+#hypothises null n alternate
+import pandas as pd
+from scipy import stats
+
+df = pd.read_csv("D:\\DS\\grades.csv")
+print(df)
+
+t_statistic, p_value = stats.ttest_rel(df['Before'], df['After'])
+
+print("T-statistic:", t_statistic)
+print("P-value:", p_value)
+
+alpha = 0.05
+if p_value < alpha:
+    print("Reject the null hypothesis: The course has a significant effect
+    on the grades.")
+else:
+    print("Fail to reject the null hypothesis: The course does not have
+    a significant effect on the grades.")
+
+#interpret the result 
+import numpy as np
+from scipy.stats import ttest_1samp
+          
+delivery_times = [28, 32, 30, 35, 29, 27, 31, 34, 33, 29]
+
+hypothesized_mean = 30
+
+t_stat, p_value = ttest_1samp(delivery_times, hypothesized_mean)
+
+print("T-statistic:", t_stat)
+print("P-value:", p_value)
+
+alpha = 0.05
+
+print("\nHypotheses:")
+print("Null Hypothesis (H0): The mean delivery time is 30 minutes.")
+print("Alternate Hypothesis (H1): The mean delivery time is not 30 minutes.")
+
+if p_value < alpha:
+    print(f"\nResult: Reject the null hypothesis (p = {p_value:.4f} < {alpha}).")
+    print("Conclusion: The mean delivery time is significantly different from 30 minutes.")
+else:
+    print(f"\nResult: Fail to reject the null hypothesis (p = {p_value:.4f} ≥ {alpha}).")
+    print("Conclusion: There is no significant evidence that the mean delivery time differs from 30 minutes.")
+
+
+
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+import matplotlib.pyplot as plt
+
+
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+model = DecisionTreeClassifier()
+model.fit(X, y)
+
+plt.figure(figsize=(12, 8))
+
+plot_tree(model, feature_names=iris.feature_names, class_names=iris.target_names, filled=True)
+plt.show()

@@ -1,0 +1,87 @@
+#Linear Regression simple 
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+
+data = pd.read_csv("d:\\ds\\data.csv")
+
+print("Dataset:")
+print(data.head())
+
+X = data[['x']]
+y = data['y']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,random_state=42)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+
+print("\nModel Evaluation:")
+print("Mean squared error: %.2f" % mean_squared_error(y_test, y_pred))
+print("Coefficient of determination (R^2): %.2f" % r2_score(y_test,y_pred))
+
+
+
+new_data = pd.DataFrame({'x': [6]})  
+
+predicted_output = model.predict(new_data)
+
+print("Predicted output:", predicted_output)
+
+
+#Explore and interpret te regression model coefficient and goodness-of0fit measure
+
+X = data[['x']]
+y = data['y']
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,random_state=42)
+
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+
+print("\nModel Evaluation:")
+print("Mean squared error: %.2f" % mean_squared_error(y_test, y_pred))
+print("Coefficient of determination (R^2): %.2f" % r2_score(y_test,y_pred))
+
+
+print("\nModel Coefficients:")
+print("Coefficients:", model.coef_)
+print("Intercept:", model.intercept_)
+
+
+
+#extend the analysis to multiple linear regressioin and assess the impact of additional predictors
+
+new_data = pd.DataFrame({'x': [6]}) 
+
+predicted_output = model.predict(new_data)
+
+print("Predicted output:", predicted_output)
+
+y_pred = model.predict(X_test)
+
+print("\nModel Evaluation:")
+print("Mean squared error: %.2f" % mean_squared_error(y_test, y_pred))
+print("Coefficient of determination (R^2): %.2f" % r2_score(y_test,y_pred))
+
+
+print("\nModel Coefficients:")
+print("Coefficients:", model.coef_)
+print("Intercept:", model.intercept_)
+
+
+
+
+
+new_data = pd.DataFrame({'x': [6]}) 
+
+predicted_output = model.predict(new_data)
+
+print("Predicted output:", predicted_output)
